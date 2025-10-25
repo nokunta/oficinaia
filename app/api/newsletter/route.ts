@@ -47,7 +47,7 @@ export async function POST(request: Request) {
     const beehiivUrl = `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions`
     const requestBody = {
       email: email.toLowerCase().trim(),
-      reactivate_existing: false,
+      reactivate_existing: true,
       send_welcome_email: true,
       utm_source: 'oficina-website',
       utm_medium: 'popup',
