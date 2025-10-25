@@ -119,10 +119,12 @@ function VideoPageContent() {
             <div className="relative pb-[56.25%]">
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src={selectedOption.videoUrl}
+                src={selectedOption.videoUrl.replace('youtube.com', 'youtube-nocookie.com')}
                 title={selectedOption.title}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
               />
             </div>
           </div>
