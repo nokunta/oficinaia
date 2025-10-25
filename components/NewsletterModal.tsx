@@ -39,8 +39,8 @@ export default function NewsletterModal({ isOpen, onClose }: NewsletterModalProp
           onClose()
           setSuccess(false)
           setFormData({ email: '', firstName: '' })
-          // Redirecionar para página de boas vindas do Beehiiv
-          window.location.href = 'https://couceloia.beehiiv.com/subscribe'
+          // Redirecionar para página de recursos
+          window.location.href = '/recursos'
         }, 2000)
       } else {
         setError(data.error || 'Erro ao subscrever. Tenta novamente.')
