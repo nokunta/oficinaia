@@ -187,7 +187,7 @@ export default function OfferPage() {
                   <p className="text-green-400 text-sm font-semibold">🎉 Até ao fim de outubro</p>
                 </div>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-bold text-white">18€</span>
+                  <span className="text-3xl font-bold text-white">9€</span>
                   <span className="text-gray-300">/mês depois</span>
                 </div>
                 <p className="text-gray-400 text-sm mt-2">Cancela quando quiseres</p>
