@@ -79,14 +79,12 @@ export default function RecursosPage() {
                   <p className="text-gray-400 mb-6 leading-relaxed text-sm">
                     {option.description}
                   </p>
-                  <a
-                    href={option.videoUrl.replace('youtube.com', 'youtube-nocookie.com')}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-3 bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-500/50 text-green-400 font-semibold rounded-xl text-center hover:from-green-500 hover:to-cyan-500 hover:text-black transition-all duration-300"
+                  <button
+                    onClick={() => router.push(`/video?option=${option.id}`)}
+                    className="w-full py-3 bg-gradient-to-r from-green-500/20 to-cyan-500/20 border border-green-500/50 text-green-400 font-semibold rounded-xl text-center hover:from-green-500 hover:to-cyan-500 hover:text-black transition-all duration-300"
                   >
                     Ver Vídeo
-                  </a>
+                  </button>
                 </div>
               </div>
             </motion.div>

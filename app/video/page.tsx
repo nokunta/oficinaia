@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import optionsData from '@/data/options.json'
-import { analytics } from '@/lib/analytics'
 
 function VideoPageContent() {
   const router = useRouter()
@@ -16,32 +15,11 @@ function VideoPageContent() {
     if (optionId) {
       const option = optionsData.options.find(opt => opt.id === optionId)
       setSelectedOption(option)
-      
-      if (option) {
-        analytics.track('video_page_viewed', {
-          optionId,
-          title: option.title,
-          step: 2,
-        })
-      }
     }
   }, [optionId])
 
-  const handleContinue = () => {
-    analytics.track('video_completed', {
-      optionId,
-      title: selectedOption?.title,
-      step: 2,
-    })
-    router.push('/offer')
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   const handleBack = () => {
-    router.push('/')
+    router.push('/recursos')
   }
 
   if (!selectedOption) {
@@ -149,27 +127,12 @@ function VideoPageContent() {
             className="mt-8 text-center"
           >
             <button
-              onClick={handleContinue}
+              onClick={() => window.open('https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c', '_blank')}
               className="px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 text-black text-base sm:text-lg font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/50"
             >
-              Obter Recursos Exclusivos
+              Juntar-me à Comunidade
             </button>
           </motion.div>
-        </motion.div>
-
-        {/* Progress Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-12 text-center"
-        >
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="w-8 h-1 bg-green-500 rounded-full" />
-            <div className="w-8 h-1 bg-green-500 rounded-full" />
-            <div className="w-8 h-1 bg-gray-700 rounded-full" />
-          </div>
-          <p className="text-gray-400">Passo 2 de 3 • Vê o Vídeo</p>
         </motion.div>
       </div>
     </div>
