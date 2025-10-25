@@ -2,10 +2,13 @@
 
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import NewsletterModal from '@/components/NewsletterModal'
 
 export default function HomePage() {
   const router = useRouter()
   const SKOOL_URL = 'https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c'
+  const [showNewsletter, setShowNewsletter] = useState(false)
 
   return (
     <div className="min-h-screen bg-black">
@@ -91,8 +94,32 @@ export default function HomePage() {
                 Fazer Parte da Comunidade
               </motion.button>
             </motion.div>
+
+            {/* Newsletter CTA - Subtle */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-16 text-center"
+            >
+              <p className="text-gray-400 text-sm mb-3">
+                Ou recebe dicas semanais de IA por email
+              </p>
+              <button
+                onClick={() => setShowNewsletter(true)}
+                className="text-green-400 hover:text-green-300 text-sm font-medium underline underline-offset-4 transition-colors"
+              >
+                Subscrever Newsletter
+              </button>
+            </motion.div>
           </div>
         </section>
+
+        {/* Newsletter Modal */}
+        <NewsletterModal 
+          isOpen={showNewsletter} 
+          onClose={() => setShowNewsletter(false)} 
+        />
 
         {/* Footer */}
         <footer className="py-12 px-4 bg-black border-t border-green-500/20">
