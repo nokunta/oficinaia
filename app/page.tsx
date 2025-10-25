@@ -225,11 +225,8 @@ export default function HomePage() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Escolhe o Teu Caminho
+                Escolhe a Tua Ferramenta
               </h2>
-              <p className="text-xl text-gray-400">
-                Três oficinas especializadas para dominar a IA
-              </p>
             </motion.div>
 
             {/* Three Cards */}
