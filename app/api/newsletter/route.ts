@@ -54,7 +54,7 @@ export async function POST(request: Request) {
       referring_site: 'oficinaia.com',
       custom_fields: [
         {
-          name: 'first_name',
+          name: 'Nome',
           value: firstName.trim()
         }
       ]
