@@ -167,7 +167,7 @@ export default function OfferPage() {
           >
             {/* Popular Badge */}
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-              <span className="px-6 py-2 bg-gradient-to-r from-green-500 to-cyan-500 text-black text-sm font-bold rounded-full shadow-lg">
+              <span className="px-6 py-2 bg-gradient-to-r from-green-500 to-cyan-500 text-black text-xs font-bold rounded-full shadow-lg">
                 ⭐ RECOMENDADO
               </span>
             </div>
@@ -200,13 +200,11 @@ export default function OfferPage() {
               <ul className="space-y-4 mb-8">
                 {[
                   'Acesso completo à Oficina de IA',
-                  'Sessões de mentoria semanais',
                   'Comunidade privada exclusiva',
                   'Suporte prioritário',
                   'Biblioteca completa de guias',
                   'Recursos e templates exclusivos',
                   'Acesso antecipado a novos conteúdos',
-                  'Certificado de conclusão',
                   'Tudo da newsletter incluído',
                 ].map((feature, index) => (
                   <motion.li
