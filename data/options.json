@@ -1,0 +1,41 @@
+{
+  "options": [
+    {
+      "id": "conteudo",
+      "title": "Criação de Clones em Vídeo com IA",
+      "description": "Aprende a criar clones digitais realistas em vídeo usando ferramentas de IA. Multiplica a tua presença e cria conteúdo de forma escalável.",
+      "icon": "🎬",
+      "image": "/ronaldo.png",
+      "videoUrl": "https://www.youtube.com/embed/53k4xwqyWps",
+      "mediaType": "image"
+    },
+    {
+      "id": "app",
+      "title": "Aprende a Criar Ilusões Incríveis nos Teus Vídeos",
+      "description": "Aprende a criar ilusões incríveis nos teus vídeos usando ferramentas de IA. Multiplica a tua presença e cria conteúdo de forma escalável.",
+      "icon": "✨",
+      "image": "/camisola.png",
+      "videoUrl": "https://www.youtube.com/embed/PheLhn_Oias",
+      "mediaType": "image"
+    },
+    {
+      "id": "chatgpt",
+      "title": "Melhores Truques do ChatGPT",
+      "description": "Descobre os truques mais poderosos do ChatGPT para aumentar a tua produtividade e obter resultados incríveis.",
+      "icon": "🎯",
+      "image": "/chatgpt.png",
+      "videoUrl": "https://www.youtube.com/embed/8G7bgaSlwxI?start=144",
+      "mediaType": "image"
+    },
+    {
+      "id": "powerpoint",
+      "title": "Cria Apresentações de PowerPoint em Menos de 1 Minuto!! 🤩",
+      "description": "Aprende a criar apresentações profissionais de PowerPoint em segundos usando IA. Poupa tempo e impressiona com slides incríveis.",
+      "icon": "📊",
+      "image": "/gamma.png",
+      "videoUrl": "https://www.youtube.com/embed/kml2CmmWLhE",
+      "mediaType": "image"
+    }
+  ]
+}
+

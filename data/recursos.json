@@ -1,0 +1,36 @@
+{
+  "recursos": [
+    {
+      "id": 1,
+      "icon": "✨",
+      "title": "50+ Prompts IA",
+      "description": "Mais de 50 prompts organizados em diferentes categorias. Neste documento encontras vários assistentes e ferramentas que te vão ajudar a realizar as tuas tarefas do dia a dia de forma mais simples e rápida.",
+      "buttonText": "Obter Recurso",
+      "buttonLink": "https://boiling-lumber-6bb.notion.site/50-PROMPTS-PARA-CHATGPT-26f9bd564a2f8016b65adc793b53bc1c?pvs=74",
+      "color": "from-purple-500 to-pink-500",
+      "image": "https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/47594c04-d98b-4313-a808-6e8f3b39d0d6/Generated_Image_September_16__2025_-_7_50AM.png?t=1758001887"
+    },
+    {
+      "id": 2,
+      "icon": "🤔",
+      "title": "Qual IA?",
+      "description": "Criei este website para decidires qual a melhor ferramenta a utilizar entre ChatGPT, Claude, Gemini e Perplexity.",
+      "buttonText": "Experimentar",
+      "buttonLink": "https://nokunta.github.io/qual-ia/?newsletter",
+      "color": "from-blue-500 to-cyan-500",
+      "image": "https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/dfa3b696-f49a-4206-a6b8-d8e40ab1aa1e/Captura_de_ecra%CC%83_2025-10-16__a%CC%80s_00.12.57.png?t=1760566421"
+    },
+    {
+      "id": 3,
+      "icon": "🇵🇹",
+      "title": "Escreve à Tuga",
+      "description": "O Escreve à Tuga é um GPT personalizado que te ajuda a escrever e traduzir em português de Portugal, garantindo uma linguagem adaptada, clara e melhorada ao nosso português.",
+      "buttonText": "Experimentar GPT",
+      "buttonLink": "https://chatgpt.com/g/g-68c7b7c0ddf881918b0e9ac28d43de53-escreve-a-tuga/c/68c88da2-09d8-8323-8161-35d7645f268e",
+      "color": "from-green-500 to-emerald-500",
+      "image": "https://beehiiv-images-production.s3.amazonaws.com/uploads/asset/file/f97bc527-8824-42c0-bc66-bd569a5553ac/Generated_Image_September_15__2025_-_10_17AM.png?t=1758002129"
+    }
+  ]
+}
+
+
