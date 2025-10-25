@@ -2,23 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import optionsData from '@/data/options.json'
-import { analytics } from '@/lib/analytics'
 
 export default function HomePage() {
   const router = useRouter()
-
-  const handlePathClick = (optionId: string, title: string, disabled?: boolean) => {
-    if (disabled) {
-      return
-    }
-    analytics.track('path_selected', {
-      optionId,
-      title,
-      step: 1,
-    })
-    router.push(`/video?option=${optionId}`)
-  }
+  const SKOOL_URL = 'https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c'
 
   return (
     <div className="min-h-screen bg-black">
@@ -30,320 +17,78 @@ export default function HomePage() {
       </div>
 
       <div className="relative z-10">
-        {/* Hero Section */}
+        {/* Simple Hero Section */}
         <section className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
-          <div className="container mx-auto max-w-[1600px] w-full">
-            {/* Top: Text Content */}
+          <div className="container mx-auto max-w-6xl w-full">
+            {/* Logo and Title */}
             <motion.div
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center mb-8 max-w-5xl mx-auto"
+              className="text-center mb-12"
             >
-              {/* Logo and Brand */}
-              <div className="inline-flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl flex items-center justify-center">
-                  <svg className="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="inline-flex items-center gap-3 mb-8">
+                <div className="w-16 h-16 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-xl flex items-center justify-center">
+                  <svg className="w-9 h-9 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
                   Oficina de IA
-                </h2>
+                </h1>
               </div>
 
-              {/* Main title */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight px-4">
-                Obtém as ferramentas para{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
-                  dominar a Inteligência Artificial
-                </span>
-              </h1>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+                Domina a Inteligência Artificial
+              </h2>
             </motion.div>
 
-            {/* Center: Full Width Hero Banner Image */}
+            {/* Hero Image */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-full mb-8"
+              className="relative w-full mb-12"
             >
-              <div className="relative w-full">
-                {/* Glowing background effect */}
+              <div className="relative w-full max-w-4xl mx-auto">
                 <div className="absolute -inset-6 bg-gradient-to-r from-green-500 to-cyan-500 rounded-3xl blur-3xl opacity-20 animate-pulse" />
                 
-                {/* Main banner image - FULL WIDTH */}
                 <div className="relative rounded-3xl overflow-hidden border-2 border-green-500/50 shadow-2xl shadow-green-500/50">
                   <img
                     src="/hero-banner.jpg"
                     alt="João Coucelo - Oficina de IA"
                     className="w-full h-auto object-cover"
-                    style={{ minHeight: '500px', maxHeight: '70vh' }}
+                    style={{ maxHeight: '600px' }}
                   />
-                  {/* Overlay gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
                 </div>
-
-                {/* Floating accent elements */}
-                <motion.div
-                  animate={{ 
-                    y: [0, -10, 0],
-                    rotate: [0, 5, 0]
-                  }}
-                  transition={{ 
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="absolute -bottom-6 -right-6 w-16 h-16 bg-black/90 backdrop-blur-sm border-2 border-green-500 rounded-2xl flex items-center justify-center shadow-xl shadow-green-500/50 hidden md:flex"
-                >
-                  <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </motion.div>
-
-                <motion.div
-                  animate={{ 
-                    y: [0, -12, 0],
-                    rotate: [0, -5, 0]
-                  }}
-                  transition={{ 
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.5
-                  }}
-                  className="absolute -top-6 -left-6 w-14 h-14 bg-black/90 backdrop-blur-sm border-2 border-cyan-500 rounded-2xl flex items-center justify-center shadow-xl shadow-cyan-500/50 hidden md:flex"
-                >
-                  <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </motion.div>
               </div>
             </motion.div>
 
-            {/* Bottom: CTA Button */}
+            {/* Two Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const element = document.getElementById('caminhos')
-                  element?.scrollIntoView({ behavior: 'smooth' })
-                }}
-                className="px-10 py-4 bg-gradient-to-r from-green-500 to-cyan-500 text-black font-bold text-lg rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300"
+                onClick={() => router.push('/recursos')}
+                className="w-full sm:w-auto px-12 py-5 bg-gradient-to-r from-green-500 to-cyan-500 text-black font-bold text-xl rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300"
               >
-                Explorar Agora
+                Aprender IA
               </motion.button>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Choose Your Path Section */}
-        <section id="caminhos" className="py-20 px-4">
-          <div className="container mx-auto max-w-7xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Escolhe a Tua Ferramenta
-              </h2>
-            </motion.div>
-
-            {/* Three Cards */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {optionsData.options.map((option, index) => {
-                const isDisabled = (option as any).disabled
-                return (
-                  <motion.div
-                    key={option.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.15 }}
-                    viewport={{ once: true }}
-                    className={`group ${isDisabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}`}
-                    onClick={() => handlePathClick(option.id, option.title, isDisabled)}
-                  >
-                    <div className={`relative h-full bg-gradient-to-br from-green-500/5 to-cyan-500/5 backdrop-blur-sm border border-green-500/20 rounded-3xl overflow-hidden transition-all duration-500 ${isDisabled ? '' : 'hover:border-green-500 hover:shadow-2xl hover:shadow-green-500/30'}`}>
-                    {/* Image or Video */}
-                    <div className="relative h-80 overflow-hidden">
-                      {(option as any).mediaType === 'video' ? (
-                        <video
-                          src={option.image}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img
-                          src={option.image}
-                          alt={option.title}
-                          className={`w-full h-full object-cover transition-transform duration-700 ${isDisabled ? '' : 'group-hover:scale-110'}`}
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                      
-                      {/* "Em breve" badge for disabled options */}
-                      {isDisabled && (
-                        <div className="absolute top-4 left-4 px-4 py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold text-sm rounded-full">
-                          Em breve
-                        </div>
-                      )}
-                      
-                      {/* Icon overlay */}
-                      <div className="absolute top-4 right-4 w-16 h-16 bg-black/80 backdrop-blur-sm border border-green-500 rounded-full flex items-center justify-center text-3xl">
-                        {option.icon}
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="p-6">
-                      <h3 className={`text-2xl font-bold text-white mb-3 transition-colors ${isDisabled ? '' : 'group-hover:text-green-400'}`}>
-                        {option.title}
-                      </h3>
-                      <p className="text-gray-400 mb-6 leading-relaxed">
-                        {option.description}
-                      </p>
-                      <button 
-                        disabled={isDisabled}
-                        className={`w-full py-3 border rounded-xl font-semibold transition-all duration-300 ${
-                          isDisabled 
-                            ? 'bg-gray-500/20 border-gray-500/50 text-gray-500 cursor-not-allowed' 
-                            : 'bg-gradient-to-r from-green-500/20 to-cyan-500/20 border-green-500/50 text-green-400 group-hover:from-green-500 group-hover:to-cyan-500 group-hover:text-black'
-                        }`}
-                      >
-                        {isDisabled ? 'Disponível em breve' : 'Ver vídeo detalhado'}
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* About Section */}
-        <section className="py-20 px-4 bg-black/50 backdrop-blur-sm border-y border-green-500/20">
-          <div className="container mx-auto max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Sobre Mim
-              </h2>
-              <p className="text-xl text-gray-300 leading-relaxed mb-12 max-w-4xl mx-auto">
-                Sou o <span className="text-green-400 font-semibold">João Coucelo</span>, programador há <span className="text-cyan-400 font-semibold">6 anos</span> e criador da Oficina de IA.
-                <br /><br />
-                Nos últimos anos mergulhei no mundo da IA e agora ensino profissionais e curiosos a transformar ideias em projetos reais.
-                <br /><br />
-                A <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400 font-semibold">Oficina de IA</span> é um espaço para te guiar passo a passo neste novo mundo.
-              </p>
-
-              {/* Tool Icons */}
-              <div className="grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-                {[
-                  { 
-                    icon: (
-                      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                    ),
-                    label: 'Programador'
-                  },
-                  { 
-                    icon: (
-                      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    ),
-                    label: 'Criador'
-                  },
-                  { 
-                    icon: (
-                      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    ),
-                    label: 'Mentor'
-                  },
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col items-center gap-3"
-                  >
-                    <div className="w-24 h-24 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500/30 rounded-2xl flex items-center justify-center text-green-400">
-                      {item.icon}
-                    </div>
-                    <span className="text-gray-300 font-medium">{item.label}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Community Section */}
-        <section className="py-20 px-4 bg-gradient-to-br from-green-500/5 to-cyan-500/5 border-y border-green-500/20">
-          <div className="container mx-auto max-w-5xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              {/* Logo */}
-              <div className="inline-flex items-center gap-4 mb-8">
-                <div className="w-20 h-20 bg-gradient-to-br from-green-500/20 to-cyan-500/20 border-2 border-green-500 rounded-2xl flex items-center justify-center">
-                  <svg className="w-12 h-12 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Oficina de IA
-                </h2>
-              </div>
-
-              <p className="text-2xl md:text-3xl text-gray-300 font-medium mb-8 leading-relaxed">
-                A Oficina de IA: a primeira comunidade portuguesa focada em{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-400">
-                  Inteligência Artificial prática
-                </span>
-              </p>
-
-              <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-                Guias práticos sobre ferramentas, workflows e novidades, a Oficina de IA é um espaço vivo de partilha e crescimento onde vais aprender, discutir e aplicar IA no dia a dia.
-              </p>
 
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => window.open('https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c', '_blank')}
-                className="px-10 py-4 bg-gradient-to-r from-green-500 to-cyan-500 text-black font-bold text-lg rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300"
+                onClick={() => window.open(SKOOL_URL, '_blank')}
+                className="w-full sm:w-auto px-12 py-5 bg-white/10 backdrop-blur-sm border-2 border-green-500 text-white font-bold text-xl rounded-xl hover:bg-white/20 hover:shadow-2xl hover:shadow-green-500/30 transition-all duration-300"
               >
-                Juntar-me à Oficina
+                Fazer Parte da Comunidade
               </motion.button>
             </motion.div>
           </div>
@@ -410,3 +155,4 @@ export default function HomePage() {
     </div>
   )
 }
+
