@@ -4,12 +4,14 @@ import { motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import optionsData from '@/data/options.json'
+import NewsletterModal from '@/components/NewsletterModal'
 
 function VideoPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const optionId = searchParams.get('option')
   const [selectedOption, setSelectedOption] = useState<any>(null)
+  const [showNewsletter, setShowNewsletter] = useState(false)
 
   useEffect(() => {
     if (optionId) {
@@ -119,22 +121,34 @@ function VideoPageContent() {
             </p>
           </motion.div>
 
-          {/* Continue Button */}
+          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-8 text-center"
+            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
               onClick={() => window.open('https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c', '_blank')}
-              className="px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 text-black text-base sm:text-lg font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/50"
+              className="w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-green-500 to-cyan-500 hover:from-green-600 hover:to-cyan-600 text-black text-base sm:text-lg font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/50"
             >
               Juntar-me à Comunidade
+            </button>
+            <button
+              onClick={() => setShowNewsletter(true)}
+              className="w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-base sm:text-lg font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50"
+            >
+              Juntar-me à Newsletter
             </button>
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Newsletter Modal */}
+      <NewsletterModal 
+        isOpen={showNewsletter} 
+        onClose={() => setShowNewsletter(false)} 
+      />
     </div>
   )
 }
