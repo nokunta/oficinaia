@@ -44,28 +44,24 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NODE_ENV: production
 
-      - name: Move public files to basePath
+      - name: Move public assets to basePath
         run: |
-          mkdir -p out/oficinaia
-          # Move all image/media files from public to out/oficinaia
           cd out
-          # Move files one by one to avoid issues
-          [ -f hero-banner.jpg ] && mv hero-banner.jpg oficinaia/ && echo "Moved hero-banner.jpg"
-          [ -f camisola.png ] && mv camisola.png oficinaia/ && echo "Moved camisola.png"
-          [ -f chatgpt.png ] && mv chatgpt.png oficinaia/ && echo "Moved chatgpt.png"
-          [ -f ronaldo.png ] && mv ronaldo.png oficinaia/ && echo "Moved ronaldo.png"
-          [ -f gamma.png ] && mv gamma.png oficinaia/ && echo "Moved gamma.png"
-          [ -f favicon.ico ] && mv favicon.ico oficinaia/ && echo "Moved favicon.ico"
-          # Move any other PNG/JPG files
-          for file in *.png *.jpg *.ico *.mp4; do
-            [ -f "$file" ] && mv "$file" oficinaia/ && echo "Moved $file"
+          mkdir -p oficinaia
+          # Move all static assets to basePath folder
+          for ext in png jpg ico mp4; do
+            for file in *.$ext; do
+              [ -f "$file" ] && mv "$file" oficinaia/ && echo "✅ Moved $file"
+            done
           done
           # Create .nojekyll to prevent Jekyll processing
           touch .nojekyll
-          echo "Created .nojekyll file"
-          echo "Files in oficinaia/:"
-          ls -la oficinaia/
+          echo "✅ Created .nojekyll"
+          echo "📁 Files in oficinaia/:"
+          ls -lh oficinaia/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
