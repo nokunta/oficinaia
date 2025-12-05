@@ -47,41 +47,25 @@ jobs:
 
       - name: Copy public assets to basePath
         run: |
-          echo "🔍 Step 1: Checking public folder..."
-          ls -la public/ | head -10
-          
-          echo "🔍 Step 2: Checking out folder before copy..."
-          ls -la out/ | grep -E "\.png|\.jpg|\.ico" | head -10
-          
           # Create basePath directory
           mkdir -p out/oficinaia
           
-          echo "🔍 Step 3: Copying ALL files from public to out/oficinaia..."
-          if [ -d public ]; then
-            # Copy everything from public
-            cp -rv public/* out/oficinaia/ 2>&1 | head -20
-            echo "✅ Copied all files from public/"
-          fi
+          # Copy ALL files from public folder directly
+          echo "📦 Copying files from public/ to out/oficinaia/..."
+          cp -r public/* out/oficinaia/
           
-          echo "🔍 Step 4: Moving files from out root to oficinaia..."
+          # Also move any files Next.js put in out/ root
           cd out
-          # Move any remaining files
           for file in *.png *.jpg *.ico *.mp4; do
-            if [ -f "$file" ]; then
-              mv -v "$file" oficinaia/ 2>&1 && echo "✅ Moved $file" || echo "⚠️ Could not move $file"
-            fi
+            [ -f "$file" ] && mv "$file" oficinaia/ 2>/dev/null || true
           done
           
           # Create .nojekyll
           touch .nojekyll
-          echo "✅ Created .nojekyll"
           
-          echo "🔍 Step 5: Final verification - Files in oficinaia/:"
-          ls -lh oficinaia/ | head -20
-          
-          echo "🔍 Step 6: Checking if hero-banner.jpg exists:"
-          ls -lh oficinaia/hero-banner.jpg || echo "❌ hero-banner.jpg NOT FOUND!"
-          ls -lh oficinaia/*.png | head -5
+          # Verify files are there
+          echo "✅ Files copied. Verifying:"
+          ls -lh oficinaia/ | grep -E "\.png|\.jpg|\.ico"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
