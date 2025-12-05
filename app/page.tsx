@@ -57,7 +57,7 @@ export default function HomePage() {
                 
                 <div className="relative rounded-3xl overflow-hidden border-2 border-green-500/50 shadow-2xl shadow-green-500/50">
                   <img
-                    src="/hero-banner.jpg"
+                    src="/oficinaia/hero-banner.jpg"
                     alt="João Coucelo - Oficina de IA"
                     className="w-full h-auto object-cover"
                     style={{ maxHeight: '600px' }}
