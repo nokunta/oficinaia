@@ -45,41 +45,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Copy public assets to basePath
-        run: |
-          echo "🔧 STEP 1: Create basePath directory"
-          mkdir -p out/oficinaia
-          
-          echo "🔧 STEP 2: Copy files from public/ to out/oficinaia/"
-          # Copy each file type separately to avoid errors
-          shopt -s nullglob
-          for file in public/*.png; do [ -f "$file" ] && cp -v "$file" out/oficinaia/; done
-          for file in public/*.jpg; do [ -f "$file" ] && cp -v "$file" out/oficinaia/; done
-          for file in public/*.jpeg; do [ -f "$file" ] && cp -v "$file" out/oficinaia/; done
-          for file in public/*.ico; do [ -f "$file" ] && cp -v "$file" out/oficinaia/; done
-          for file in public/*.mp4; do [ -f "$file" ] && cp -v "$file" out/oficinaia/; done
-          
-          echo "🔧 STEP 3: Move files from out/ root to oficinaia/"
-          cd out
-          shopt -s nullglob
-          for file in *.png *.jpg *.jpeg *.ico *.mp4; do
-            [ -f "$file" ] && mv -v "$file" oficinaia/ 2>&1
-          done
-          
-          echo "🔧 STEP 4: Create .nojekyll"
-          touch .nojekyll
-          
-          echo "🔧 STEP 5: VERIFICATION"
-          echo "=== Files in oficinaia/ ==="
-          ls -lh oficinaia/ | head -20
-          echo ""
-          echo "=== Checking specific files ==="
-          [ -f oficinaia/hero-banner.jpg ] && echo "✅ hero-banner.jpg EXISTS" || echo "❌ hero-banner.jpg MISSING"
-          [ -f oficinaia/ronaldo.png ] && echo "✅ ronaldo.png EXISTS" || echo "❌ ronaldo.png MISSING"
-          [ -f oficinaia/camisola.png ] && echo "✅ camisola.png EXISTS" || echo "❌ camisola.png MISSING"
-          [ -f oficinaia/chatgpt.png ] && echo "✅ chatgpt.png EXISTS" || echo "❌ chatgpt.png MISSING"
-          [ -f oficinaia/gamma.png ] && echo "✅ gamma.png EXISTS" || echo "❌ gamma.png MISSING"
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
