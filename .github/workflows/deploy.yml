@@ -48,12 +48,18 @@ jobs:
       - name: Move public files to basePath
         run: |
           mkdir -p out/oficinaia
-          # Move all files from public to out/oficinaia
-          if [ -d out ]; then
-            find out -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.ico" -o -name "*.mp4" \) -exec mv {} out/oficinaia/ \;
-          fi
+          # Move all image/media files from public to out/oficinaia
+          cd out
+          for file in *.jpg *.png *.ico *.mp4 2>/dev/null; do
+            if [ -f "$file" ]; then
+              mv "$file" oficinaia/
+              echo "Moved $file to oficinaia/"
+            fi
+          done
           # Create .nojekyll to prevent Jekyll processing
-          touch out/.nojekyll
+          touch .nojekyll
+          echo "Created .nojekyll file"
+          ls -la oficinaia/ | head -10
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
