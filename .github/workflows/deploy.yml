@@ -50,7 +50,8 @@ jobs:
           mkdir -p out/oficinaia
           # Move all image/media files from public to out/oficinaia
           cd out
-          for file in *.jpg *.png *.ico *.mp4 2>/dev/null; do
+          shopt -s nullglob
+          for file in *.jpg *.png *.ico *.mp4; do
             if [ -f "$file" ]; then
               mv "$file" oficinaia/
               echo "Moved $file to oficinaia/"
@@ -59,6 +60,7 @@ jobs:
           # Create .nojekyll to prevent Jekyll processing
           touch .nojekyll
           echo "Created .nojekyll file"
+          echo "Files in oficinaia/:"
           ls -la oficinaia/ | head -10
 
       - name: Setup Pages
