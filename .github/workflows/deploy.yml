@@ -50,18 +50,22 @@ jobs:
           mkdir -p out/oficinaia
           # Move all image/media files from public to out/oficinaia
           cd out
-          shopt -s nullglob
-          for file in *.jpg *.png *.ico *.mp4; do
-            if [ -f "$file" ]; then
-              mv "$file" oficinaia/
-              echo "Moved $file to oficinaia/"
-            fi
+          # Move files one by one to avoid issues
+          [ -f hero-banner.jpg ] && mv hero-banner.jpg oficinaia/ && echo "Moved hero-banner.jpg"
+          [ -f camisola.png ] && mv camisola.png oficinaia/ && echo "Moved camisola.png"
+          [ -f chatgpt.png ] && mv chatgpt.png oficinaia/ && echo "Moved chatgpt.png"
+          [ -f ronaldo.png ] && mv ronaldo.png oficinaia/ && echo "Moved ronaldo.png"
+          [ -f gamma.png ] && mv gamma.png oficinaia/ && echo "Moved gamma.png"
+          [ -f favicon.ico ] && mv favicon.ico oficinaia/ && echo "Moved favicon.ico"
+          # Move any other PNG/JPG files
+          for file in *.png *.jpg *.ico *.mp4; do
+            [ -f "$file" ] && mv "$file" oficinaia/ && echo "Moved $file"
           done
           # Create .nojekyll to prevent Jekyll processing
           touch .nojekyll
           echo "Created .nojekyll file"
           echo "Files in oficinaia/:"
-          ls -la oficinaia/ | head -10
+          ls -la oficinaia/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
