@@ -2,13 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { analytics } from '@/lib/analytics'
-import NewsletterModal from '@/components/NewsletterModal'
 
 export default function OfferPage() {
   const router = useRouter()
-  const [showNewsletterModal, setShowNewsletterModal] = useState(false)
+  const BEEHIIV_URL = 'https://couceloia.beehiiv.com/'
 
   const handleOfferClick = (type: 'free' | 'paid') => {
     analytics.track('offer_selected', {
@@ -17,7 +15,7 @@ export default function OfferPage() {
     })
 
     if (type === 'free') {
-      setShowNewsletterModal(true)
+      window.open(BEEHIIV_URL, '_blank')
     } else {
       window.open('https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c', '_blank')
     }
@@ -28,13 +26,7 @@ export default function OfferPage() {
   }
 
   return (
-    <>
-      <NewsletterModal 
-        isOpen={showNewsletterModal} 
-        onClose={() => setShowNewsletterModal(false)} 
-      />
-      
-      <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black">
         {/* Animated background */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 via-black to-cyan-500/10" />
@@ -312,6 +304,5 @@ export default function OfferPage() {
         </motion.div>
         </div>
       </div>
-    </>
   )
 }

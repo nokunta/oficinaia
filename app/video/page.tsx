@@ -4,14 +4,13 @@ import { motion } from 'framer-motion'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Suspense, useEffect, useState } from 'react'
 import optionsData from '@/data/options.json'
-import NewsletterModal from '@/components/NewsletterModal'
 
 function VideoPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const optionId = searchParams.get('option')
   const [selectedOption, setSelectedOption] = useState<any>(null)
-  const [showNewsletter, setShowNewsletter] = useState(false)
+  const BEEHIIV_URL = 'https://couceloia.beehiiv.com/'
 
   useEffect(() => {
     if (optionId) {
@@ -135,7 +134,7 @@ function VideoPageContent() {
               Juntar-me à Comunidade
             </button>
             <button
-              onClick={() => setShowNewsletter(true)}
+              onClick={() => window.open(BEEHIIV_URL, '_blank')}
               className="w-full sm:w-auto px-8 sm:px-12 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-base sm:text-lg font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50"
             >
               Juntar-me à Newsletter
@@ -143,12 +142,6 @@ function VideoPageContent() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Newsletter Modal */}
-      <NewsletterModal 
-        isOpen={showNewsletter} 
-        onClose={() => setShowNewsletter(false)} 
-      />
     </div>
   )
 }

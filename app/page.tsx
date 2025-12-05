@@ -2,13 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import NewsletterModal from '@/components/NewsletterModal'
 
 export default function HomePage() {
   const router = useRouter()
   const SKOOL_URL = 'https://www.skool.com/couceloia-3033/about?ref=6b5518d997064e459336d02c601ad74c'
-  const [showNewsletter, setShowNewsletter] = useState(false)
+  const BEEHIIV_URL = 'https://couceloia.beehiiv.com/'
 
   return (
     <div className="min-h-screen bg-black">
@@ -112,7 +110,7 @@ export default function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => setShowNewsletter(true)}
+                onClick={() => window.open(BEEHIIV_URL, '_blank')}
                 className="w-full sm:w-auto px-16 py-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-2xl rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300"
               >
                 Subscrever Newsletter
@@ -137,12 +135,6 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
-        {/* Newsletter Modal */}
-        <NewsletterModal 
-          isOpen={showNewsletter} 
-          onClose={() => setShowNewsletter(false)} 
-        />
 
         {/* Footer */}
         <footer className="py-12 px-4 bg-black border-t border-green-500/20">
