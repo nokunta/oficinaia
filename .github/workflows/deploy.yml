@@ -45,6 +45,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Move public files to basePath
+        run: |
+          mkdir -p out/oficinaia
+          # Move all files from public to out/oficinaia (except those already in _next)
+          if [ -d out ]; then
+            find out -maxdepth 1 -type f -name "*.jpg" -o -name "*.png" -o -name "*.ico" -o -name "*.mp4" | while read file; do
+              mv "$file" out/oficinaia/
+            done
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
