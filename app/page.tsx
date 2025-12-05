@@ -69,48 +69,71 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            {/* Two Buttons */}
+            {/* YouTube Video */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative w-full mb-12"
+            >
+              <div className="relative w-full max-w-4xl mx-auto">
+                <div className="absolute -inset-6 bg-gradient-to-r from-green-500 to-cyan-500 rounded-3xl blur-3xl opacity-20 animate-pulse" />
+                
+                <div className="relative rounded-3xl overflow-hidden border-2 border-green-500/50 shadow-2xl shadow-green-500/50">
+                  <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src="https://www.youtube.com/embed/GdoqayLJR0o"
+                      title="YouTube video player"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Main CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-6"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.open(SKOOL_URL, '_blank')}
+                className="w-full sm:w-auto px-16 py-6 bg-gradient-to-r from-green-500 to-cyan-500 text-black font-bold text-2xl rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300"
+              >
+                Fazer Parte da Comunidade
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowNewsletter(true)}
+                className="w-full sm:w-auto px-16 py-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold text-2xl rounded-xl hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300"
+              >
+                Subscrever Newsletter
+              </motion.button>
+            </motion.div>
+
+            {/* Secondary Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="flex justify-center items-center"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => router.push('/recursos')}
-                className="w-full sm:w-auto px-12 py-5 bg-gradient-to-r from-green-500 to-cyan-500 text-black font-bold text-xl rounded-xl hover:shadow-2xl hover:shadow-green-500/50 transition-all duration-300"
+                className="w-full sm:w-auto px-12 py-4 bg-white/10 backdrop-blur-sm border-2 border-green-500 text-white font-bold text-lg rounded-xl hover:bg-white/20 hover:shadow-2xl hover:shadow-green-500/30 transition-all duration-300"
               >
-                Aprender IA
+                Quero aprender mais
               </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.open(SKOOL_URL, '_blank')}
-                className="w-full sm:w-auto px-12 py-5 bg-white/10 backdrop-blur-sm border-2 border-green-500 text-white font-bold text-xl rounded-xl hover:bg-white/20 hover:shadow-2xl hover:shadow-green-500/30 transition-all duration-300"
-              >
-                Fazer Parte da Comunidade
-              </motion.button>
-            </motion.div>
-
-            {/* Newsletter CTA - Subtle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-16 text-center"
-            >
-              <p className="text-gray-400 text-sm mb-3">
-                Ou recebe dicas semanais de IA por email
-              </p>
-              <button
-                onClick={() => setShowNewsletter(true)}
-                className="text-green-400 hover:text-green-300 text-sm font-medium underline underline-offset-4 transition-colors"
-              >
-                Subscrever Newsletter
-              </button>
             </motion.div>
           </div>
         </section>

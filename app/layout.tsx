@@ -1,12 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
-  title: 'Oficina de IA | Domina a Inteligência Artificial',
-  description: 'A tua oficina para criar imagens perfeitas, vídeos incríveis e agentes excepcionais com IA. Aprende com João Coucelo.',
+  title: 'Oficina de IA - Domina a Inteligência Artificial',
+  description: 'Aprende a usar Inteligência Artificial de forma prática e eficaz',
 }
 
 export default function RootLayout({
@@ -15,9 +12,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt">
+      <body>{children}</body>
     </html>
   )
 }
-

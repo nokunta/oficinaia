@@ -211,3 +211,12 @@ Adiciona as variáveis de ambiente nas configurações do serviço (Netlify, Rai
 **Qualquer dúvida, verifica os logs no terminal ou consola do browser!** 🔍
 
 
+
+
+
+
+
+
+
+
+
