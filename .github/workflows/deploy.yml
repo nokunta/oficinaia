@@ -47,23 +47,28 @@ jobs:
 
       - name: Copy public assets to basePath
         run: |
+          echo "🔍 Step 1: Checking public folder..."
+          ls -la public/ | head -10
+          
+          echo "🔍 Step 2: Checking out folder before copy..."
+          ls -la out/ | grep -E "\.png|\.jpg|\.ico" | head -10
+          
           # Create basePath directory
           mkdir -p out/oficinaia
           
-          # Copy all files from public to out/oficinaia
+          echo "🔍 Step 3: Copying ALL files from public to out/oficinaia..."
           if [ -d public ]; then
-            cp -v public/*.png out/oficinaia/ 2>/dev/null || true
-            cp -v public/*.jpg out/oficinaia/ 2>/dev/null || true
-            cp -v public/*.ico out/oficinaia/ 2>/dev/null || true
-            cp -v public/*.mp4 out/oficinaia/ 2>/dev/null || true
-            echo "✅ Copied files from public/"
+            # Copy everything from public
+            cp -rv public/* out/oficinaia/ 2>&1 | head -20
+            echo "✅ Copied all files from public/"
           fi
           
-          # Also move any files that Next.js put in out/ root
+          echo "🔍 Step 4: Moving files from out root to oficinaia..."
           cd out
+          # Move any remaining files
           for file in *.png *.jpg *.ico *.mp4; do
-            if [ -f "$file" ] && [ "$file" != "favicon.ico" ] || [ "$file" == "favicon.ico" ]; then
-              mv -v "$file" oficinaia/ 2>/dev/null && echo "✅ Moved $file" || true
+            if [ -f "$file" ]; then
+              mv -v "$file" oficinaia/ 2>&1 && echo "✅ Moved $file" || echo "⚠️ Could not move $file"
             fi
           done
           
@@ -71,9 +76,12 @@ jobs:
           touch .nojekyll
           echo "✅ Created .nojekyll"
           
-          # Verify
-          echo "📁 Files in oficinaia/:"
-          ls -lh oficinaia/ | head -15
+          echo "🔍 Step 5: Final verification - Files in oficinaia/:"
+          ls -lh oficinaia/ | head -20
+          
+          echo "🔍 Step 6: Checking if hero-banner.jpg exists:"
+          ls -lh oficinaia/hero-banner.jpg || echo "❌ hero-banner.jpg NOT FOUND!"
+          ls -lh oficinaia/*.png | head -5
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
