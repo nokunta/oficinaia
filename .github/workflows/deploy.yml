@@ -48,11 +48,9 @@ jobs:
       - name: Move public files to basePath
         run: |
           mkdir -p out/oficinaia
-          # Move all files from public to out/oficinaia (except those already in _next)
+          # Move all files from public to out/oficinaia
           if [ -d out ]; then
-            find out -maxdepth 1 -type f -name "*.jpg" -o -name "*.png" -o -name "*.ico" -o -name "*.mp4" | while read file; do
-              mv "$file" out/oficinaia/
-            done
+            find out -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.ico" -o -name "*.mp4" \) -exec mv {} out/oficinaia/ \;
           fi
 
       - name: Setup Pages
