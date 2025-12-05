@@ -44,28 +44,36 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          NODE_ENV: production
 
-      - name: Move public assets to basePath
+      - name: Copy public assets to basePath
         run: |
+          # Create basePath directory
+          mkdir -p out/oficinaia
+          
+          # Copy all files from public to out/oficinaia
+          if [ -d public ]; then
+            cp -v public/*.png out/oficinaia/ 2>/dev/null || true
+            cp -v public/*.jpg out/oficinaia/ 2>/dev/null || true
+            cp -v public/*.ico out/oficinaia/ 2>/dev/null || true
+            cp -v public/*.mp4 out/oficinaia/ 2>/dev/null || true
+            echo "✅ Copied files from public/"
+          fi
+          
+          # Also move any files that Next.js put in out/ root
           cd out
-          mkdir -p oficinaia
-          echo "📦 Moving static assets..."
-          # Move files explicitly
-          shopt -s nullglob
           for file in *.png *.jpg *.ico *.mp4; do
-            if [ -f "$file" ]; then
-              mv "$file" oficinaia/ && echo "✅ Moved $file"
+            if [ -f "$file" ] && [ "$file" != "favicon.ico" ] || [ "$file" == "favicon.ico" ]; then
+              mv -v "$file" oficinaia/ 2>/dev/null && echo "✅ Moved $file" || true
             fi
           done
+          
           # Create .nojekyll
           touch .nojekyll
           echo "✅ Created .nojekyll"
-          echo "📁 Verifying files in oficinaia/:"
-          ls -lh oficinaia/ || echo "⚠️ No files found"
-          echo "📁 Remaining files in root:"
-          ls -lh *.png *.jpg *.ico 2>/dev/null | head -3 || echo "✅ All files moved successfully"
+          
+          # Verify
+          echo "📁 Files in oficinaia/:"
+          ls -lh oficinaia/ | head -15
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
