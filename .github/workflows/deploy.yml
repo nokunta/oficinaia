@@ -52,6 +52,8 @@ jobs:
           if [ -d out ]; then
             find out -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.ico" -o -name "*.mp4" \) -exec mv {} out/oficinaia/ \;
           fi
+          # Create .nojekyll to prevent Jekyll processing
+          touch out/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
