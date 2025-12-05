@@ -51,17 +51,21 @@ jobs:
         run: |
           cd out
           mkdir -p oficinaia
-          # Move all static assets to basePath folder
-          for ext in png jpg ico mp4; do
-            for file in *.$ext; do
-              [ -f "$file" ] && mv "$file" oficinaia/ && echo "✅ Moved $file"
-            done
+          echo "📦 Moving static assets..."
+          # Move files explicitly
+          shopt -s nullglob
+          for file in *.png *.jpg *.ico *.mp4; do
+            if [ -f "$file" ]; then
+              mv "$file" oficinaia/ && echo "✅ Moved $file"
+            fi
           done
-          # Create .nojekyll to prevent Jekyll processing
+          # Create .nojekyll
           touch .nojekyll
           echo "✅ Created .nojekyll"
-          echo "📁 Files in oficinaia/:"
-          ls -lh oficinaia/
+          echo "📁 Verifying files in oficinaia/:"
+          ls -lh oficinaia/ || echo "⚠️ No files found"
+          echo "📁 Remaining files in root:"
+          ls -lh *.png *.jpg *.ico 2>/dev/null | head -3 || echo "✅ All files moved successfully"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
