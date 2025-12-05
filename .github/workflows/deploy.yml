@@ -47,25 +47,36 @@ jobs:
 
       - name: Copy public assets to basePath
         run: |
-          # Create basePath directory
+          # Next.js copies public files to out/ root, we need to move them to basePath
+          echo "📦 Setting up basePath directory..."
           mkdir -p out/oficinaia
           
-          # Copy ALL files from public folder directly
-          echo "📦 Copying files from public/ to out/oficinaia/..."
-          cp -r public/* out/oficinaia/
-          
-          # Also move any files Next.js put in out/ root
+          # Move all static assets from out/ root to out/oficinaia/
+          echo "📦 Moving static assets from out/ to out/oficinaia/..."
           cd out
-          for file in *.png *.jpg *.ico *.mp4; do
-            [ -f "$file" ] && mv "$file" oficinaia/ 2>/dev/null || true
-          done
           
-          # Create .nojekyll
+          # Move all image and media files
+          find . -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.ico" -o -name "*.mp4" -o -name "*.svg" -o -name "*.gif" -o -name "*.webp" \) -exec mv {} oficinaia/ \;
+          
+          # Also copy directly from public folder as backup
+          if [ -d ../public ]; then
+            echo "📦 Copying from public/ as backup..."
+            cp -r ../public/* oficinaia/ 2>/dev/null || true
+          fi
+          
+          # Create .nojekyll file
           touch .nojekyll
+          echo "✅ Created .nojekyll"
           
-          # Verify files are there
-          echo "✅ Files copied. Verifying:"
-          ls -lh oficinaia/ | grep -E "\.png|\.jpg|\.ico"
+          # Verify
+          echo "✅ Verification - Files in oficinaia/:"
+          ls -lh oficinaia/ | head -20
+          echo ""
+          echo "Checking for hero-banner.jpg:"
+          ls -lh oficinaia/hero-banner.jpg && echo "✅ hero-banner.jpg found!" || echo "❌ hero-banner.jpg NOT found"
+          echo ""
+          echo "Checking for PNG files:"
+          ls -lh oficinaia/*.png 2>/dev/null | head -5 || echo "No PNG files found"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
