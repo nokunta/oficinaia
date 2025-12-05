@@ -21,15 +21,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+
+      - name: List files
+        run: ls -la | head -20
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "Using package-lock.json"
+            npm ci
+          else
+            echo "No package-lock.json, running npm install"
+            npm install
+          fi
 
       - name: Build
         run: npm run build
