@@ -47,36 +47,43 @@ jobs:
 
       - name: Copy public assets to basePath
         run: |
-          # Next.js copies public files to out/ root, we need to move them to basePath
-          echo "📦 Setting up basePath directory..."
+          echo "🔧 FIXING IMAGES - Step 1: Create basePath directory"
           mkdir -p out/oficinaia
           
-          # Move all static assets from out/ root to out/oficinaia/
-          echo "📦 Moving static assets from out/ to out/oficinaia/..."
-          cd out
-          
-          # Move all image and media files
-          find . -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" -o -name "*.ico" -o -name "*.mp4" -o -name "*.svg" -o -name "*.gif" -o -name "*.webp" \) -exec mv {} oficinaia/ \;
-          
-          # Also copy directly from public folder as backup
-          if [ -d ../public ]; then
-            echo "📦 Copying from public/ as backup..."
-            cp -r ../public/* oficinaia/ 2>/dev/null || true
+          echo "🔧 FIXING IMAGES - Step 2: Copy ALL files from public/ to out/oficinaia/"
+          if [ -d public ]; then
+            cp -v public/hero-banner.jpg out/oficinaia/ 2>&1 || echo "⚠️ hero-banner.jpg not in public"
+            cp -v public/*.png out/oficinaia/ 2>&1 || echo "⚠️ No PNG files in public"
+            cp -v public/*.jpg out/oficinaia/ 2>&1 || echo "⚠️ No JPG files in public"
+            cp -v public/*.ico out/oficinaia/ 2>&1 || echo "⚠️ No ICO files in public"
+            cp -v public/*.mp4 out/oficinaia/ 2>&1 || echo "⚠️ No MP4 files in public"
+            echo "✅ Copied from public/"
           fi
           
-          # Create .nojekyll file
-          touch .nojekyll
-          echo "✅ Created .nojekyll"
+          echo "🔧 FIXING IMAGES - Step 3: Move files from out/ root to oficinaia/"
+          cd out
+          shopt -s nullglob
+          for file in *.png *.jpg *.jpeg *.ico *.mp4 *.svg *.gif *.webp; do
+            if [ -f "$file" ]; then
+              mv -v "$file" oficinaia/ 2>&1 && echo "✅ Moved $file"
+            fi
+          done
           
-          # Verify
-          echo "✅ Verification - Files in oficinaia/:"
+          echo "🔧 FIXING IMAGES - Step 4: Create .nojekyll"
+          touch .nojekyll
+          
+          echo "🔧 FIXING IMAGES - Step 5: FINAL VERIFICATION"
+          echo "Files in oficinaia/:"
           ls -lh oficinaia/ | head -20
           echo ""
-          echo "Checking for hero-banner.jpg:"
-          ls -lh oficinaia/hero-banner.jpg && echo "✅ hero-banner.jpg found!" || echo "❌ hero-banner.jpg NOT found"
+          echo "Checking hero-banner.jpg:"
+          test -f oficinaia/hero-banner.jpg && echo "✅✅✅ hero-banner.jpg EXISTS!" || echo "❌❌❌ hero-banner.jpg MISSING!"
           echo ""
-          echo "Checking for PNG files:"
-          ls -lh oficinaia/*.png 2>/dev/null | head -5 || echo "No PNG files found"
+          echo "Checking ronaldo.png:"
+          test -f oficinaia/ronaldo.png && echo "✅✅✅ ronaldo.png EXISTS!" || echo "❌❌❌ ronaldo.png MISSING!"
+          echo ""
+          echo "All PNG files:"
+          ls -1 oficinaia/*.png 2>/dev/null || echo "No PNG files!"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
